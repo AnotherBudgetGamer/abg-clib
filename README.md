@@ -76,7 +76,7 @@ ar
 [ar](https://www.man7.org/linux/man-pages/man1/ar.1.html) creates, modifies, and extracts from archives and is used to bundle our library.
 
 ### For Windows PowerShell / Command Prompt
-For `build.bat` make sure `gcc` and `ar` are available in your PATH. [Here](https://www.man7.org/linux/man-pages/man1/ar.1.html) is some more information.
+For `build.bat` make sure `gcc` and `ar` are available in your PATH. [Here](https://gcc.gnu.org/install/configure.html) is some more information.
 
 If using MSYS2 UCRT64 tools from PowerShell, confirm they are available:
 ```PowerShell
