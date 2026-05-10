@@ -21,12 +21,13 @@ abg-clib/
 │   └── abg_math.c
 └── build/
     ├── linux/
+    ├── ucrt/
     └── win/
 ```
 
 ### Important Folders
 | Folder    | Purpose        |
-| :-----    | ------:        |
+| :-----    | :------        |
 | include/  | Public Headers |
 | src/	    | C source files |
 | build/    | Build Output   |
@@ -47,11 +48,16 @@ Individual headers can also be included directly:
 ```
 
 ## Build Output
-This project builds into a static single file header library:
+This project builds into a static library archive:
 ```
 libabg.a
 ```
-Different build folders are used for Linux and Windows and do not overwrite each other.
+Different build folders are used for Linux, MSYS2/UCRT64, and Windows batch builds so each environment output is separate.
+```
+build/linux/libabg.a
+build/ucrt/libabg.a
+build/win/libabg.a
+```
 
 ## Build Requirements
 You will need a C compiler and basic build tools
@@ -79,23 +85,28 @@ ar
 For `build.bat` make sure `gcc` and `ar` are available in your PATH. [Here](https://gcc.gnu.org/install/configure.html) is some more information.
 
 If using MSYS2 UCRT64 tools from PowerShell, confirm they are available:
-```PowerShell
+```Bash
 gcc --version
 ar --version
 ```
 If gcc is not present, download MSYS2 and update the packages:
-```Powershell
+```Bash
 pacman -Syu
 pacman -Su
 ```
-Install gcc:
-```PowerShell
-pacman -S mingw-w64-x86_64-gcc
+Install gcc and make:
+```Bash
+pacman -S mingw-w64-ucrt-x86_64-gcc
+pacman -S mingw-w64-ucrt-x86_64-make
 ```
-Add C:\msys64\wingw64\bin to your system PATH.
+Then use:
+```Bash
+mingw32-make
+```
+Add C:\msys64\ucrt64\bin to your system PATH. [Here](https://stackoverflow.com/questions/9546324/adding-a-directory-to-the-path-environment-variable-in-windows#9546345f) is more information.
 
 ### Building With Make
-The Makefile supports a custom `BUILD_DIR` variable so each environment can output to its own folder.
+The Makefile supports a custom build directory `BUILD_DIR` variable so each environment can output to its own folder.
 
 #### Linux / WSL
 From project root:
@@ -134,7 +145,7 @@ build/linux/libabg.a
 ```
 
 ### Building with build.bat
-The `build.bat` script is intended for Windows Command Prompt of PowerShell.
+The `build.bat` script is intended for Windows Command Prompt or PowerShell.
 
 #### PowerShell
 From the project root:
@@ -164,8 +175,9 @@ You can also manually delete the `build/` folder.
 After building the library, another C project can include the headers and link against the static library.
 
 Example:
+**Note**: this example includes the umbrella header file but you could also just link the `abg-math` module as a stand-alone.
 ```C
-#include "abg_core.h"
+#include "abg_core.h" // #include "abg_math.h"
 
 int main(void) {
     float value = ABG_ClampFloat(15.0f, 0.0f, 10.0f);
@@ -174,7 +186,7 @@ int main(void) {
 ```
 Example compile command:
 ```Bash
-gcc main.c -Ipath/to/agb-clib/include path/to/agb-clib/build/linux/libabg.a -o main
+gcc main.c -Ipath/to/abg-clib/include path/to/abg-clib/build/linux/libabg.a -o main
 ```
 Adjust the library path depending on your environment:
 ```
