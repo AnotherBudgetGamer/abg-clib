@@ -9,6 +9,7 @@ This project is intentionally simple and is meant to be easy to build, inspect, 
 ---
 
 ## Project Structure
+```txt
 abg-clib/
 ├── Makefile
 ├── build.sh
@@ -22,6 +23,7 @@ abg-clib/
     ├── linux/
     ├── ucrt/
     └── windows/
+```
 
 ### Important Folders
 | Folder    | Purpose        |
@@ -30,7 +32,7 @@ abg-clib/
 | src/	    | C source files |
 | build/    | Build Output   |
 
-The build/ folder is generated during compilation and should not be committed to Git.
+The build/ folder is generated during compilation if not present.
 
 ### Headers
 
