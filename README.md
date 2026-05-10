@@ -21,8 +21,7 @@ abg-clib/
 │   └── abg_math.c
 └── build/
     ├── linux/
-    ├── ucrt/
-    └── windows/
+    └── win/
 ```
 
 ### Important Folders
@@ -32,7 +31,7 @@ abg-clib/
 | src/	    | C source files |
 | build/    | Build Output   |
 
-The build/ folder is generated during compilation if not present.
+The `build/` folder is generated during compilation if not present.
 
 ### Headers
 
@@ -40,7 +39,7 @@ The main umbrella header is:
 ```C
 #include "abg_core.h"
 ```
-This header includes all the available ABG library modules
+This header includes all the available ABG library modules.
 
 Individual headers can also be included directly:
 ```C
@@ -70,15 +69,28 @@ gcc
 make
 ar
 ```
+[gcc](https://gcc.gnu.org/) is the GNU compiler.
+[make](https://www.gnu.org/software/make/) controls the generation of executables and other non-source files.
+[ar](https://www.man7.org/linux/man-pages/man1/ar.1.html) creates, modifies, and extracts from archives and is used to bundle our library.
 
 ### For Windows PowerShell / Command Prompt
-For `build.bat` make sure `gcc` and `ar` are available in your PATH.
+For `build.bat` make sure `gcc` and `ar` are available in your PATH. [Here](https://www.man7.org/linux/man-pages/man1/ar.1.html) is some more information.
 
 If using MSYS2 UCRT64 tools from PowerShell, confirm they are available:
 ```PowerShell
 gcc --version
 ar --version
 ```
+If gcc is not present, download MSYS2 and update the packages:
+```Powershell
+pacman -Syu
+pacman -Su
+```
+Install gcc:
+```PowerShell
+pacman -S mingw-w64-x86_64-gcc
+```
+Add C:\msys64\wingw64\bin to your system PATH.
 
 ### Building With Make
 The Makefile supports a custom `BUILD_DIR` variable so each environment can output to its own folder.
@@ -147,7 +159,7 @@ You can also manually delete the `build/` folder.
 
 
 ## Example Usage in Another C Project
-AFter building the library, another C project can include the headers and link against the static library.
+After building the library, another C project can include the headers and link against the static library.
 
 Example:
 ```C
@@ -165,7 +177,6 @@ gcc main.c -Ipath/to/agb-clib/include path/to/agb-clib/build/linux/libabg.a -o m
 Adjust the library path depending on your environment:
 ```
 build/linux/libabg.a
-build/ucrt/libabg.a
 build/win/libabg.a
 ```
 
