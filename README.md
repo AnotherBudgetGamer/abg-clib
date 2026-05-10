@@ -8,6 +8,21 @@ This project is intentionally simple and is meant to be easy to build, inspect, 
 
 ---
 
+## Table of Contents
+- [Project Structure](#project-structure)
+- [Important Folders](#important-folders)
+- [Headers](#headers)
+- [Build Output](#build-output)
+- [Build Requirements](#build-requirements)
+- [Build for Linux](#for-linuxwsl)
+- [Build for Windows](#for-windows-powershell--command-prompt)
+- [Build with Make](#building-with-make)
+- [Build with build.sh](#building-with-buildsh)
+- [Build with build.bat](#building-with-buildbat)
+- [Cleaning Build Files](#cleaning-build-files)
+- [Example Usage](#example-usage-in-another-c-project)
+- [Notes](#notes)
+
 ## Project Structure
 ```txt
 abg-clib/
@@ -128,7 +143,7 @@ Output:
 build/ucrt/libabg.a
 ```
 
-#### Building with build.sh
+### Building with build.sh
 The `build.sh` script is intended for Linux, WSL, Git Bash, or MSYS2-style Bash terminals. This is the recommended build option.
 
 Before running for the first time, make it executable:
