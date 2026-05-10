@@ -70,7 +70,9 @@ make
 ar
 ```
 [gcc](https://gcc.gnu.org/) is the GNU compiler.
+
 [make](https://www.gnu.org/software/make/) controls the generation of executables and other non-source files.
+
 [ar](https://www.man7.org/linux/man-pages/man1/ar.1.html) creates, modifies, and extracts from archives and is used to bundle our library.
 
 ### For Windows PowerShell / Command Prompt
