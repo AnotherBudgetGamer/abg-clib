@@ -28,7 +28,7 @@ float ABG_RemapFloatClamped(float v, float inMin, float inMax, float outMin, flo
 
 bool ABG_FloatEquals(float a, float b, float epsilon);
 
-float ABG_SafeDivideFloat(float numerator, float denoninator, float fallback);
+float ABG_SafeDivideFloat(float numerator, float denominator, float fallback);
 
 
 #endif /* ABG_MATH_H */
