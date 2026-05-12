@@ -5,7 +5,8 @@ CFLAGS = -Wall -Wextra -g -pedantic -std=c99 -Iinclude
 
 BUILD_DIR = build
 TARGET = $(BUILD_DIR)/libabg_core.a
-PREFIX = /usr/local
+
+PREFIX ?= /usr/local
 
 SRCS = \
 	src/abg_core.c \
@@ -25,16 +26,18 @@ $(BUILD_DIR)/%.o: src/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 install: $(TARGET)
-	sudo cp include/abg_core.h $(PREFIX)/include/
-	sudo cp include/abg_math.h $(PREFIX)/include/
-	sudo cp include/abg_random.h $(PREFIX)/include/
-	sudo cp $(TARGET) $(PREFIX)/lib/
+	mkdir -p $(PREFIX)/include
+	mkdir -p $(PREFIX)/lib
+	cp include/abg_core.h $(PREFIX)/include/
+	cp include/abg_math.h $(PREFIX)/include/
+	cp include/abg_random.h $(PREFIX)/include/
+	cp $(TARGET) $(PREFIX)/lib/
 
 uninstall:
-	sudo rm -f $(PREFIX)/include/abg_core.h
-	sudo rm -f $(PREFIX)/include/abg_math.h
-	sudo rm -f $(PREFIX)/include/abg_random.h
-	sudo rm -f $(PREFIX)/lib/libabg_core.a
+	rm -f $(PREFIX)/include/abg_core.h
+	rm -f $(PREFIX)/include/abg_math.h
+	rm -f $(PREFIX)/include/abg_random.h
+	rm -f $(PREFIX)/lib/libabg_core.a
 
 clean:
 	rm -rf $(BUILD_DIR)
